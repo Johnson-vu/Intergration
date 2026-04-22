@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_shopee" model="ir.ui.view">
+        <field name="name">res.config.settings.view.shopee</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.action_general_configuration"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Shopee Integration"
+                     id="shopee_settings" data-key="shopee_integration">
+                    <h2>Shopee Integration</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="shopee_auto_confirm_order"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="shopee_auto_confirm_order"/>
+                                <div class="text-muted">
+                                    Tự động xác nhận đơn bán hàng khi kéo từ Shopee về
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="shopee_default_config_id" string="Shop mặc định"/>
+                                <field name="shopee_default_config_id"
+                                    placeholder="Chọn shop mặc định..."/>
+                                <div class="text-muted">
+                                    Shop Shopee được dùng khi không chỉ định shop cụ thể
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

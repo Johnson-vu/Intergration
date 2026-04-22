@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="shopee_order_view_list" model="ir.ui.view">
+        <field name="name">shopee.order.view.list</field>
+        <field name="model">shopee.order</field>
+        <field name="arch" type="xml">
+            <list string="Đơn hàng Shopee"
+                  decoration-success="order_status == 'COMPLETED'"
+                  decoration-danger="order_status in ('CANCELLED', 'IN_CANCEL')"
+                  decoration-info="order_status in ('SHIPPED', 'PROCESSED')">
+                <field name="shopee_order_sn"/>
+                <field name="shopee_config_id"/>
+                <field name="buyer_username"/>
+                <field name="recipient_name"/>
+                <field name="total_amount" sum="Tổng"/>
+                <field name="create_time"/>
+                <field name="order_status" widget="badge"
+                    decoration-success="order_status == 'COMPLETED'"
+                    decoration-danger="order_status in ('CANCELLED', 'IN_CANCEL')"
+                    decoration-info="order_status in ('SHIPPED', 'PROCESSED')"
+                    decoration-warning="order_status in ('UNPAID', 'READY_TO_SHIP')"/>
+                <field name="sale_order_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="shopee_order_view_form" model="ir.ui.view">
+        <field name="name">shopee.order.view.form</field>
+        <field name="model">shopee.order</field>
+        <field name="arch" type="xml">
+            <form string="Đơn hàng Shopee">
+                <header>
+                    <button name="action_create_sale_order" string="Tạo Đơn bán hàng" type="object"
+                        class="btn-primary"
+                        invisible="sale_order_id"/>
+                    <button name="action_view_sale_order" string="Xem Đơn bán hàng" type="object"
+                        invisible="not sale_order_id"/>
+                    <field name="order_status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="shopee_order_sn"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Thông tin đơn hàng">
+                            <field name="shopee_config_id"/>
+                            <field name="sale_order_id"/>
+                            <field name="create_time"/>
+                            <field name="pay_time"/>
+                            <field name="payment_method"/>
+                        </group>
+                        <group string="Tài chính">
+                            <field name="total_amount"/>
+                            <field name="actual_shipping_fee"/>
+                            <field name="estimated_shipping_fee"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Thông tin người mua">
+                            <field name="buyer_username"/>
+                            <field name="partner_id"/>
+                        </group>
+                        <group string="Giao hàng">
+                            <field name="recipient_name"/>
+                            <field name="recipient_phone"/>
+                            <field name="shipping_address"/>
+                            <field name="shipping_carrier"/>
+                            <field name="logistics_tracking_number"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sản phẩm">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="shopee_item_id"/>
+                                    <field name="item_name"/>
+                                    <field name="item_sku"/>
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="original_price"/>
+                                    <field name="discounted_price"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Ghi chú">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="shopee_order_view_search" model="ir.ui.view">
+        <field name="name">shopee.order.view.search</field>
+        <field name="model">shopee.order</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm đơn hàng Shopee">
+                <field name="shopee_order_sn" string="Mã đơn"/>
+                <field name="buyer_username" string="Tên tài khoản"/>
+                <field name="recipient_name" string="Người nhận"/>
+                <filter string="Chờ lấy hàng" name="ready_to_ship"
+                    domain="[('order_status', '=', 'READY_TO_SHIP')]"/>
+                <filter string="Đang giao" name="shipped"
+                    domain="[('order_status', '=', 'SHIPPED')]"/>
+                <filter string="Hoàn thành" name="completed"
+                    domain="[('order_status', '=', 'COMPLETED')]"/>
+                <filter string="Đã hủy" name="cancelled"
+                    domain="[('order_status', 'in', ['CANCELLED', 'IN_CANCEL'])]"/>
+                <filter string="Chưa tạo SO" name="no_sale_order"
+                    domain="[('sale_order_id', '=', False)]"/>
+                <separator/>
+                <filter string="Hôm nay" name="today"
+                    domain="[('create_time', '>=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Shop" name="group_by_config" context="{'group_by': 'shopee_config_id'}"/>
+                    <filter string="Trạng thái" name="group_by_status" context="{'group_by': 'order_status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_shopee_order" model="ir.actions.act_window">
+        <field name="name">Đơn hàng Shopee</field>
+        <field name="res_model">shopee.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="shopee_order_view_search"/>
+        <field name="context">{'search_default_ready_to_ship': 1}</field>
+    </record>
+
+</odoo>

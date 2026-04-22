@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form view -->
+    <record id="shopee_config_view_form" model="ir.ui.view">
+        <field name="name">shopee.config.view.form</field>
+        <field name="model">shopee.config</field>
+        <field name="arch" type="xml">
+            <form string="Cấu hình Shop Shopee">
+                <header>
+                    <button name="action_authorize" string="Kết nối với Shopee" type="object"
+                        class="btn-primary"
+                        invisible="state != 'draft'"
+                        confirm="Bạn sẽ được chuyển sang Shopee để cấp quyền truy cập. Tiếp tục?"/>
+                    <button name="action_test_connection" string="Kiểm tra kết nối" type="object"
+                        invisible="state != 'authorized'"/>
+                    <button name="action_refresh_token" string="Làm mới Token" type="object"
+                        invisible="state not in ('authorized', 'expired')"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,authorized"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_orders" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+                            <field name="order_count" string="Đơn hàng" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_mappings" type="object" class="oe_stat_button" icon="fa-cubes">
+                            <field name="mapping_count" string="Sản phẩm" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Tên shop (ví dụ: Shop Hà Nội)"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Thông tin Shopee Open Platform">
+                            <field name="partner_id_shopee"/>
+                            <field name="partner_key" password="True"
+                                groups="shopee_integration.group_shopee_manager"/>
+                            <field name="sandbox"/>
+                        </group>
+                        <group string="Thông tin Shop">
+                            <field name="shop_id" readonly="1"/>
+                            <field name="shop_name" readonly="1"/>
+                            <field name="token_expire_time" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Cấu hình Odoo">
+                        <group>
+                            <field name="company_id"/>
+                            <field name="warehouse_id"/>
+                        </group>
+                        <group>
+                            <field name="pricelist_id"/>
+                            <field name="team_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Hướng dẫn lấy credentials">
+                            <div class="alert alert-info" role="alert">
+                                <h4>Cách lấy Partner ID và Partner Key:</h4>
+                                <ol>
+                                    <li>Truy cập <strong>https://open.shopee.com/</strong></li>
+                                    <li>Đăng ký tài khoản nhà phát triển</li>
+                                    <li>Tạo ứng dụng mới trong phần "My Apps"</li>
+                                    <li>Điền Redirect URL: <code>[URL Odoo của bạn]/shopee/auth/callback</code></li>
+                                    <li>Lấy <strong>Partner ID</strong> và <strong>Partner Key</strong> từ trang quản lý ứng dụng</li>
+                                    <li>Điền vào form này và nhấn "Kết nối với Shopee"</li>
+                                </ol>
+                                <p><strong>Lưu ý:</strong> Môi trường Sandbox dùng để test, không cần shop Shopee thật.</p>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List view -->
+    <record id="shopee_config_view_list" model="ir.ui.view">
+        <field name="name">shopee.config.view.list</field>
+        <field name="model">shopee.config</field>
+        <field name="arch" type="xml">
+            <list string="Shop Shopee" decoration-success="state == 'authorized'"
+                  decoration-danger="state == 'expired'" decoration-muted="state == 'draft'">
+                <field name="name"/>
+                <field name="shop_id"/>
+                <field name="company_id"/>
+                <field name="warehouse_id"/>
+                <field name="token_expire_time"/>
+                <field name="order_count"/>
+                <field name="state" widget="badge"
+                    decoration-success="state == 'authorized'"
+                    decoration-danger="state == 'expired'"
+                    decoration-warning="state == 'draft'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_shopee_config" model="ir.actions.act_window">
+        <field name="name">Shop Shopee</field>
+        <field name="res_model">shopee.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Thêm shop Shopee đầu tiên của bạn!
+            </p>
+            <p>
+                Kết nối hệ thống Odoo với Shopee để đồng bộ
+                đơn hàng, sản phẩm và tồn kho tự động.
+            </p>
+        </field>
+    </record>
+
+</odoo>

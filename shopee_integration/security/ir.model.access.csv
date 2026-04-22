@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_shopee_config_user,shopee.config user,model_shopee_config,group_shopee_user,1,0,0,0
+access_shopee_config_manager,shopee.config manager,model_shopee_config,group_shopee_manager,1,1,1,1
+access_shopee_product_mapping_user,shopee.product.mapping user,model_shopee_product_mapping,group_shopee_user,1,0,0,0
+access_shopee_product_mapping_manager,shopee.product.mapping manager,model_shopee_product_mapping,group_shopee_manager,1,1,1,1
+access_shopee_order_user,shopee.order user,model_shopee_order,group_shopee_user,1,0,0,0
+access_shopee_order_manager,shopee.order manager,model_shopee_order,group_shopee_manager,1,1,1,1
+access_shopee_order_line_user,shopee.order.line user,model_shopee_order_line,group_shopee_user,1,0,0,0
+access_shopee_order_line_manager,shopee.order.line manager,model_shopee_order_line,group_shopee_manager,1,1,1,1
+access_shopee_sync_wizard_user,shopee.sync.wizard user,model_shopee_sync_wizard,group_shopee_manager,1,1,1,1

@@ -1,0 +1,112 @@
+# Vietnamese translation for shopee_integration
+# Copyright (C) 2024 Johnson Vu
+# License LGPL-3.0
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo shopee_integration 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Cấu hình Shop Shopee"
+msgstr "Cấu hình Shop Shopee"
+
+msgid "Partner ID"
+msgstr "Partner ID"
+
+msgid "Partner Key"
+msgstr "Partner Key"
+
+msgid "Shop ID"
+msgstr "Mã Shop"
+
+msgid "Tên shop Shopee"
+msgstr "Tên Shop Shopee"
+
+msgid "Trạng thái"
+msgstr "Trạng thái"
+
+msgid "Chưa kết nối"
+msgstr "Chưa kết nối"
+
+msgid "Đã kết nối"
+msgstr "Đã kết nối"
+
+msgid "Token hết hạn"
+msgstr "Token hết hạn"
+
+msgid "Môi trường Sandbox"
+msgstr "Môi trường Sandbox/Test"
+
+msgid "Kết nối với Shopee"
+msgstr "Kết nối với Shopee"
+
+msgid "Kiểm tra kết nối"
+msgstr "Kiểm tra kết nối"
+
+msgid "Làm mới Token"
+msgstr "Làm mới Token"
+
+msgid "Đơn hàng Shopee"
+msgstr "Đơn hàng Shopee"
+
+msgid "Mã đơn Shopee"
+msgstr "Mã đơn hàng Shopee"
+
+msgid "Sản phẩm Shopee"
+msgstr "Sản phẩm Shopee"
+
+msgid "Mapping Sản phẩm Odoo - Shopee"
+msgstr "Liên kết sản phẩm Odoo - Shopee"
+
+msgid "Đồng bộ thủ công Shopee"
+msgstr "Đồng bộ thủ công"
+
+msgid "Loại đồng bộ"
+msgstr "Loại đồng bộ"
+
+msgid "Kéo đơn hàng từ Shopee"
+msgstr "Kéo đơn hàng từ Shopee về Odoo"
+
+msgid "Đồng bộ tồn kho lên Shopee"
+msgstr "Cập nhật tồn kho lên Shopee"
+
+msgid "Kéo sản phẩm từ Shopee"
+msgstr "Kéo danh sách sản phẩm từ Shopee"
+
+msgid "Chờ thanh toán"
+msgstr "Chờ thanh toán"
+
+msgid "Chờ lấy hàng"
+msgstr "Chờ lấy hàng"
+
+msgid "Đang xử lý"
+msgstr "Đang xử lý"
+
+msgid "Đang giao"
+msgstr "Đang giao hàng"
+
+msgid "Hoàn thành"
+msgstr "Đã hoàn thành"
+
+msgid "Đang hủy"
+msgstr "Đang hủy"
+
+msgid "Đã hủy"
+msgstr "Đã hủy"
+
+msgid "Chờ hóa đơn"
+msgstr "Chờ xuất hóa đơn"
+
+msgid "Đã đồng bộ"
+msgstr "Đã đồng bộ"
+
+msgid "Chờ đồng bộ"
+msgstr "Chờ đồng bộ"
+
+msgid "Lỗi"
+msgstr "Lỗi"
